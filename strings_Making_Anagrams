@@ -27,7 +27,8 @@ int number_needed(string a, string b) {
     int count = 0,
         control_1 = 0,
         control_2 = 0,
-        maxIterations = 0;
+        maxIterations = 0,
+        lengthDiff = 0;
     
     bool result = false;
     
@@ -43,15 +44,15 @@ int number_needed(string a, string b) {
     
     if(a.length() <= b.length())
     {
-        //count = b.length() - a.length();
+        lengthDiff = b.length() - a.length();
         maxIterations = a.length();
     }else if(a.length() >= b.length())
     {
-        //count = a.length() - b.length();
+        lengthDiff = a.length() - b.length();
         maxIterations = b.length();
     }
     
-    //cout << "count: "<< count << " maxIt: " << maxIterations << endl;
+    cout << "lengthDiff: "<< lengthDiff << " maxIt: " << maxIterations << endl;
     
     
     sort(a.begin(), a.end());
@@ -78,9 +79,10 @@ int number_needed(string a, string b) {
        
        
    }
-    //cout << "count: "<< count << " maxIt: " << maxIterations << endl;
-    //cout << "a length: " << a.length() << " b length: "<< b.length() << endl;
+    cout << "count: "<< count << " maxIt: " << maxIterations << endl;
+    cout << "a length: " << a.length() << " b length: "<< b.length() << endl;
     count = 2*count - (a.length() + b.length());
+    count  = abs(count) + lengthDiff;
     return abs(count);
 }
 
