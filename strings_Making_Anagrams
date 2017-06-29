@@ -25,7 +25,10 @@ using namespace std;
 
 int number_needed(string a, string b) {
     int count = 0,
-        control = 0;
+        control_1 = 0,
+        control_2 = 0,
+        maxIterations = 0;
+    
     bool result = false;
     
     for(int i = 0; i < a.length(); i++)
@@ -38,6 +41,18 @@ int number_needed(string a, string b) {
         b[i] = tolower(b[i]);
     }
     
+    if(a.length() <= b.length())
+    {
+        //count = b.length() - a.length();
+        maxIterations = a.length();
+    }else if(a.length() >= b.length())
+    {
+        //count = a.length() - b.length();
+        maxIterations = b.length();
+    }
+    
+    //cout << "count: "<< count << " maxIt: " << maxIterations << endl;
+    
     
     sort(a.begin(), a.end());
     sort(b.begin(), b.end());
@@ -45,23 +60,28 @@ int number_needed(string a, string b) {
     //cout << "String b: " << b << endl;
    for(int i = 0; i < a.length(); i++)
    {
-       
-       for(int j = control; j < b.length(); j++)
+       for(int j = control_2; j < b.length(); j++)
        {
-           result = (a[i] == b[j]);
-           if (result)
-           {
+            result = (a[i] == b[j]);    
+            //cout << "comparing "<< a[i] << " with " << b[j] <<endl;
+            if (result)
+            {
                count++;
-               control +=1;
                result = 0;
+               j++;
+               control_2++;
                break;
-           }
-         
+            }
+           control_2++;
        }
-      
+       control_2 = 0;
+       
+       
    }
-    count = (a.length() + b.length()) - 2 * count;
-    return count;
+    //cout << "count: "<< count << " maxIt: " << maxIterations << endl;
+    //cout << "a length: " << a.length() << " b length: "<< b.length() << endl;
+    count = 2*count - (a.length() + b.length());
+    return abs(count);
 }
 
 int main(){
