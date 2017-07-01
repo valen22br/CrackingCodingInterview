@@ -1,0 +1,62 @@
+#!/bin/ruby
+
+class TrieNode
+    attr_accessor :char, :words_count, :children, :is_word 
+
+    def initialize (char = nil, is_word = false)
+        @char = char
+        @words_count = 0 # num of words this prefix is a part of
+        @children = []
+        @is_word = is_word
+    end
+    
+   def get_child(c)
+        for child in @children
+            if child.char == c
+                return child
+            end
+        end
+        return nil
+   end
+    
+end # end TrieNode class
+
+class Trie       
+    def initialize 
+        @root = TrieNode.new("*")
+    end
+    
+    def add word        
+        curr = @root        
+        word.chars.each do |w|
+            next_node = curr.get_child(w)
+            if next_node == nil
+                next_node = TrieNode.new(w)
+                curr.children << next_node                
+            end      
+            next_node.words_count += 1
+            curr = next_node
+        end
+        curr.is_word = true
+    end
+      
+    def find prefix   
+        curr = @root
+        prefix.chars.each do |c|
+            next_node = curr.get_child(c)
+            if next_node == nil
+                puts "0"; return  # prefix not found
+            end
+            curr = next_node        
+        end
+        puts curr.words_count
+    end 
+end # end class Trie
+
+t = Trie.new
+n = gets.strip.to_i
+for a0 in (0..n-1)
+    instructions = gets.strip.split(' ')
+    t.add(instructions[1]) if instructions[0] == "add"
+    t.find(instructions[1]) if instructions[0] == "find"
+end
