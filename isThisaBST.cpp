@@ -7,24 +7,28 @@ The Node struct is defined as follows:
       Node* right;
    }
 */
-   void checkLeft(Node* root)
+   int printPostOrder(Node* root)
    {
-       cout << "teste " <<  endl;
        if(root == NULL)
-           return;
-       cout << "teste END " << endl;
-       checkLeft(root->left);
+          return 0;
+       printPostOrder(root->left);
+       printPostOrder(root->right);
+       cout << "Values: " << root->data << endl;
+       return root->data;
+       
        
    }
 
-   void checkRight(Node* root)
+   int printInorder(Node* root)
    {
-       cout << "teste Right  " << root->data << endl;
-       cout << root << endl;
-       if(root == NULL)
-           return;
-       cout << "teste Right END " << endl;
-       checkLeft(root->right);
+      if(root == NULL)
+          return 0;
+       printInorder(root->left);
+       cout << "Values: " << root->data << endl;
+       printInorder(root->right);
+       
+       return root->data;
+
        
    }
 
@@ -34,8 +38,12 @@ The Node struct is defined as follows:
        Node* x = new Node();
        x = root;
        
-       checkLeft(x);
-       checkRight(x);
+       cout << "PostOrder: "<< endl;
+       printPostOrder(x);
+       
+       cout << "InOrder: "<< endl;
+       printInorder(x);
+       //checkRight(x);
        
        int i = 0;
        while (i <= 10000)
