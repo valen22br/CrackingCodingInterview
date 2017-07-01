@@ -30,12 +30,12 @@ The Node struct is defined as follows:
  
     // if left node exist that check it has
     // correct data or not
-    if (left != NULL and root->data < left->data)
+    if (left != NULL and root->data <= left->data)
         return false;
  
     // if right node exist that check it has
     // correct data or not
-    if (right != NULL and root->data > right->data)
+    if (right != NULL and root->data >= right->data)
         return false;
  
     // check recursively for every node.
