@@ -23,9 +23,6 @@
 
 using namespace std;
 
-stack<int> balanced;
-
-
 bool is_balanced(string expression) {
   stack<char> s;
   for (char c : expression) {
