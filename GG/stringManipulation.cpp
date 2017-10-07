@@ -68,7 +68,7 @@ string solution(string &S, int K) {
         int firstGroupLeght = qchars.size()%K;
         for (int i = firstGroupLeght; i > 0; i--)
         {
-            ss += qchars.front();
+            ss += static_cast<char>(toupper(qchars.front()));
             qchars.pop();
             
         }
